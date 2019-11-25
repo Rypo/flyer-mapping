@@ -1,0 +1,11 @@
+_config.py
+.ipynb_checkpoints
+__pycache__
+debug.log
+
+_drafts
+data
+resources
+icons
+finalized
+html_out
