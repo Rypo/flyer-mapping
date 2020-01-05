@@ -113,7 +113,7 @@ class Here:
         url_path = b_url + pth + rsc
 
         origins = [origins] if isinstance(origins[0], float) else origins
-        destinations = [destinations] if isinstance(destinations[0], float) else destinations
+        destinations = [destinations] if len(destinations) < 3 and isinstance(destinations, (tuple,list)) else destinations
         qparams = {
             'app_id': self.app_id,
             'app_code': self.app_code,
