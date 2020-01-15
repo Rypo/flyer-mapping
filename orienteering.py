@@ -88,7 +88,7 @@ class Orienteering:
             st,cost,profit = problem_data['solve_time'], problem_data['cost'], problem_data['profit']
 
             return ('Maximum Profit Tour:\n'+' -> '.join(tour.astype(str))+'\n'+
-                    'solve_time: {:0.4f} s | tourlen: {} | cost: {:0.2f}({:0.2f}) | profit: {:0.2f}'.format(st, len(tour), cost,costs.sum(), profit))
+                    'solve_time: {:0.4f} s | tourlen: {} | cost: {:0.2f}({:0.2f}) | profit: {:0.4f}'.format(st, len(tour), cost,costs.sum(), profit))
     
     def _set_params(self, **parameters):
         """Scikit-learn inspired parameter setter"""

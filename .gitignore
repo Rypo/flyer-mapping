@@ -4,6 +4,7 @@ __pycache__
 debug.log
 
 _drafts
+_*
 data
 models
 resources
