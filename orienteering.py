@@ -149,8 +149,8 @@ class Orienteering:
 
         cost = cx.trace(cx.matmul(cost_matrix.T,x)) # total cost of the tour
         profit = cx.sum(cx.matmul(x,score_vector))
-
         nn_ones=np.ones(nnodes)
+
         # used in place of forloop to clean up constraints
         perm = np.array([*itertools.permutations(np.arange(1,nnodes),2)])
         p0,p1 = perm[:,0], perm[:,1]
@@ -183,7 +183,7 @@ class Orienteering:
     def _tour_costs(self, x):
         """Should not be called directly. Builds and sets tour attributes"""
         # build tour path and tour cost independent from solver.
-        cost_matrix, score_vector, nodes = self._get_params('cost_matrix_', 'score_vector_','nodes')
+        cost_matrix, nodes = self._get_params('cost_matrix_','nodes')
         
         ag = np.argmax(x,axis=1)
         cyc = np.array(nx.find_cycle(nx.Graph([(i,ag[i]) for i in ag]),source=0))
