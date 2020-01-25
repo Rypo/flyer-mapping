@@ -26,18 +26,18 @@ class Orienteering:
     nodeval : str, (default='value')
         Attribute on every node in `G` that holds the "value" of traveling to that node .
     score_mult : integer, (default=100)
-        Multipler applied to node `nodeval` attributes. If solver taking a long time,
+        Multiplier applied to node `nodeval` attributes. If solver taking a long time,
         raising or lowering the magnitude of this value can help.
     dwell_time : integer, (default=0)
         Value (in seconds) added to all edges to account for non-travel time-costs.
     nonedge : float, (default=None)
-        Value used to fill non-edges in adjecency matrix. Raises a ValueError
+        Value used to fill non-edges in adjacency matrix. Raises a ValueError
         if None and `G` is not a complete graph.
         
     Attributes
     ----------
     cost_matrix_ : np.array, shape (n,n)
-        Adjecency matrix of edge weights from `G`.
+        Adjacency matrix of edge weights from `G`.
     score_vector_ : np.array, shape (n,)
         Scores associated with traveling to each node.
     is_solved_ : boolean
@@ -120,7 +120,7 @@ class Orienteering:
         
         self._set_params(cost_matrix_=cost_matrix, score_vector_=score_vector, nodes=nodes, n=n, is_solved_=False)
     
-    def solve(self, budget, solver=None, verbose=False, timeout=60):
+    def solve(self, budget, solver=None, verbose=False, **kwargs):
         """Use a cvxpy MIP Solver to approximate a tour that maximizes collected profits
         
         Valid solvers may include any of ['CBC','GLPK_MI','CPLEX','ECOS_BB','GUROBI']
@@ -137,8 +137,8 @@ class Orienteering:
             A valid, installed solver name available to cvxpy
         verbose : boolean, (default=False)
             If true, solver will output information as it runs
-        timeout : int, (default=60)
-            Time (in seconds) before forcibly stoping the solver 
+        **kwargs : keyword arguments
+            Additional argument to pass to the chosen solver.
         """
 
         cost_matrix, score_vector = self._get_params('cost_matrix_', 'score_vector_')
@@ -168,10 +168,10 @@ class Orienteering:
                     ] 
         
         prob=cx.Problem(cx.Maximize(profit),constraints)
-        prob.solve(solver=solver, verbose=verbose, TimeLimit=timeout) # TimeLimit may be Gurobi specific
+        prob.solve(solver=solver, verbose=verbose, **kwargs) # TimeLimit may be Gurobi specific
 
-        if prob.status != 'optimal':
-            raise cx.SolverError('No feasible solution found, increase budget allotment.')
+        #if prob.status != 'optimal':
+        #    raise cx.SolverError('No feasible solution found, increase budget allotment.')
         
         (x, u), profit = prob.variables(),prob.value
         
@@ -206,7 +206,7 @@ class Orienteering:
         layout : networkx.drawing.layout function (default=networkx.circular_layout)
             Function that determines how to draw the nodes on the graph
         nodesize_mult : integer, (default=750)
-            Multipler used to scale nodesize. after min-max scaling nodes
+            Multiplier used to scale nodesize. after min-max scaling nodes
             
         Returns
         -------

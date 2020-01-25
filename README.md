@@ -14,7 +14,7 @@ Gmaps was the primary API used throughout the analysis as it consistently produc
 Folium was chosen to plot the various locations largely due to its simplicity in creating aesthetically pleasing interactive maps. Customizability ultimately became an issue, however, and in the second notebook, plotly was used to plot routing paths between locations.
 
 * Primary notebook: 
-  * `flyer_mapping.ipynb`
+  * `flyer_mapping.ipynb` - [[nbviewer]](https://nbviewer.jupyter.org/github/Rypo/flyer-mapping/blob/master/flyer_mapping.ipynb)
 * Supplemental Files: 
   * `bing_api.py` - Wrapper functions around Bing Maps API  
   * `here_api.py` - Wrapper functions around HERE API 
@@ -28,6 +28,6 @@ Specifically, this is a variant of the Traveling Salesman Problem often called t
 To achieve this, Tsiligirides' approach was implemented using a MIP solver through [cvxpy](https://www.cvxpy.org/)'s interface. 
 
 * Primary notebook: 
-  * `flyer_routing.ipynb`
+  * `flyer_routing.ipynb` - [[nbviewer]](https://nbviewer.jupyter.org/github/Rypo/flyer-mapping/blob/master/flyer_routing.ipynb)
 * Supplemental Files: 
   * `orienteering.py` - Class to setup and solve the Orienteering Problem
